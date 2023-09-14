@@ -1,0 +1,47 @@
+security:
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+  role_hierarchy:
+    ROLE_ACCOUNT: ROLE_USER
+    ROLE_ADMIN: ROLE_USER
+    ROLE_CLIENT: ROLE_USER
+
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+
+  firewalls:
+    backend:
+      provider: app_user_provider
+      pattern: ^/dashboard
+      form_login:
+        login_path: admin_login
+        check_path: admin_login
+        default_target_path: /dashboard
+      logout:
+        path: dashboard_logout
+        target: admin_login
+    frontend:
+      pattern: ^/
+      provider: app_user_provider
+      form_login:
+        login_path: app_login
+        check_path: app_login
+      logout:
+        path: logout
+        target: app_login
+
+  access_control:
+    - { path: '^/forgot-password', roles: PUBLIC_ACCESS }
+    - { path: '^/profile', roles: [ ROLE_CLIENT, ROLE_ACCOUNT ] }
+    - { path: '^/profile/edit', roles: [ ROLE_CLIENT, ROLE_ACCOUNT ] }
+    - { path: '^/reset-password', roles: PUBLIC_ACCESS }
+    - { path: '^/check-mail', roles: PUBLIC_ACCESS }
+    - { path: '^/reset/{token}', roles: PUBLIC_ACCESS }
+    - { path: '^/login', roles: PUBLIC_ACCESS }
+    - { path: '^/dashboard/login', roles: PUBLIC_ACCESS }
+    - { path: '^/dashboard', roles: ROLE_ADMIN }
+    - { path: '^/manage-clients', roles: ROLE_ACCOUNT }

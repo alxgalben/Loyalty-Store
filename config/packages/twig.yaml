@@ -1,0 +1,8 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        files_directory: '%kernel.project_dir%/public/uploads/files'
+
+when@test:
+    twig:
+        strict_variables: true
