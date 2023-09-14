@@ -1,0 +1,75 @@
+{% extends 'backend-layout.html.twig' %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <div class="card">
+            <div class="card-header border-0">
+                <h3 class="card-title">Clients management</h3>
+                <div class="card-tools">
+                    <a href="#" class="btn btn-tool btn-sm">
+                        <i class="fas fa-download"></i>
+                    </a>
+                    <a href="#" class="btn btn-tool btn-sm">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Credit</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for client in clients %}
+                        <tr>
+                            <td><b>{{ client.id }}</b></td>
+                            <td><b>{{ client.email }}</b></td>
+                            <td><b>{{ client.credit }}</b></td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <a href="{{ path('set-user-actions', {'user': 'clients', 'id': client.id, 'action': 'edit'}) }}"
+                                       class="btn btn-primary mr-2">Edit</a>
+                                    <a href="{{ path('set-user-actions', {'user': 'clients', 'id': client.id, 'action': 'delete'}) }}"
+                                       class="btn btn-danger" style="margin-right: 10px;">Delete</a>
+                                    {% if not client.isActive %}
+                                        <a href="{{ path('set-user-actions', {'user': 'clients', 'id': client.id, 'action': 'activate'}) }}">
+                                            <button type="button" class="btn btn-success">mark as active</button>
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('set-user-actions', {'user': 'clients', 'id': client.id, 'action': 'deactivate'}) }}">
+                                            <button type="button" class="btn btn-secondary">mark as inactive</button>
+                                        </a>
+                                    {% endif %}
+
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block body %}
+    <h1>Edit Client</h1>
+    {{ form_start(editForm) }}
+    <div class="col">
+        <div class="col" id="some-custom-id">
+            {{ form_label(editForm.email, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(editForm.email, {'attr': {'class': 'form-control', 'style': 'width: 20%;'}}) }}
+            <small id="helpEmail" class="form-text text-muted" style="display: flex;">
+                {{ form_label(editForm.email) }}&nbsp must be like example@mail.com.
+            </small>
+            <small id="email" style="color:red;">
+                {{ form_errors(editForm.email) }}
+            </small>
+        </div>
+        <div class="col" id="some-custom-id">
+            {{ form_label(editForm.credit, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(editForm.credit, {'attr': {'class': 'form-control', 'style': 'width: 20%;'}}) }}
+            <small id="helpEmail" class="form-text text-muted" style="display: flex;">
+                {{ form_label(editForm.email) }}.
+            </small>
+            <small id="email" style="color:red;">
+                {{ form_errors(editForm.email) }}
+            </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    {{ form_end(editForm) }}
+{% endblock %}

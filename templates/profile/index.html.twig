@@ -1,0 +1,9 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block title %}{{ app.user.email|split('@')[0] }} Profile{% endblock %}
+
+{% block body %}
+    <h1>{{ app.user.email|split('@')[0] }} Profile</h1>
+    <p>Email: {{ app.user.email }}</p>
+    <a href="{{ path("user_profile_edit") }}">Edit Profile</a>
+{% endblock %}

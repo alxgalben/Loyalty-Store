@@ -1,0 +1,12 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+    <h1>Edit Profile</h1>
+    {{ form_start(editForm) }}
+    {{ form_row(editForm.email) }}
+    {#{{ form_row(editForm.credit) }}#}
+    <button type="submit">Save Changes</button>
+    {{ form_end(editForm) }}
+{% endblock %}

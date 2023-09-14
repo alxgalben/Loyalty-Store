@@ -1,0 +1,17 @@
+{% extends 'frontend-layout.html.twig' %}
+{% block body %}
+    <style>
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+
+    <div class="centered-container">
+        <a href="{{ path('approve_order', {'user_id': user.getId()}) }}" class="btn btn-info">APPROVE USER'S ORDERS</a>
+    </div>
+
+{% endblock %}
+

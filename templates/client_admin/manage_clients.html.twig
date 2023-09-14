@@ -1,0 +1,27 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block body %}
+    <h1>Manage Clients</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">Credit</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td><b>{{ client.id }}</b></td>
+                <td><b>{{ client.email }}</b></td>
+                <td><b>{{ client.credit }}</b></td>
+                <td>
+                    <a href="{{ path('edit-client', {'id': client.id}) }}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'backend-layout.html.twig' %}
+{% block title %}Edit Account{% endblock %}
+
+{% block content %}
+    <div style="margin-left: 15%;">
+        <div>
+            <h1>Edit Account</h1>
+            {{ form_start(editForm) }}
+            <div class="col">
+                <div class="col">
+                    {{ form_label(editForm.email, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                    {{ form_widget(editForm.email, {'attr': {'class': 'form-control', 'style': 'width: 20%;'}}) }}
+                </div>
+                <div class="col">
+                    {{ form_label(editForm.credit, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                    {{ form_widget(editForm.credit, {'attr': {'class': 'form-control', 'style': 'width: 20%;', 'disabled': 'disabled'}}) }}
+                </div>
+                <div class="col">
+                    {{ form_label(editForm.clients, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                    {{ form_widget(editForm.clients, {'attr': {'class': 'form-control', 'style': 'width: 20%;'}}) }}
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Save</button>
+                <br>
+                <div style="margin-top: 20px;">
+                    {% if not account.isActive %}
+                        <a href="{{ path('set-client-activation', {'id': account.id}) }}">
+                            <button type="button" class="btn btn-success" style="margin-bottom: 20px">mark as active
+                            </button>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('set-client-deactivation', {'id': account.id}) }}">
+                            <button type="button" class="btn btn-secondary" style="margin-bottom: 20px">mark as
+                                inactive
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            {{ form_end(editForm) }}
+        </div>
+    </div>
+
+{% endblock %}

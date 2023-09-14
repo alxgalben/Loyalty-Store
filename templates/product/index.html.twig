@@ -1,0 +1,28 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block body %}
+    <h1>Add a new product</h1>
+    {{ form_start(form) }}
+    <div class="col">
+        <div class="form-group">
+            {{ form_label(form.title, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control', 'style': 'width: 20%;'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.description, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control', 'style': 'width: 20%;'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_widget(form.file, {'attr': {'class': 'form-control', 'style': 'width: 20%; margin-top: 40px;'}}) }}
+            <small id="helpFile" class="form-text text-muted" style="display: flex;">
+                {{ form_label(form.file) }}&nbsp must be .jpg, .png or .gif and less than 1MB.
+            </small>
+            <small id="file" style="color:red;">
+                {{ form_errors(form.file) }}
+            </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

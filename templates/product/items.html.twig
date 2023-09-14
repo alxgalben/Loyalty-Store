@@ -1,0 +1,27 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block body %}
+    <h1>My items</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cartItem in items %}
+            <tr>
+                <td>{{ cartItem.title }}</td>
+                <td>{{ cartItem.description }}</td>
+                <td>{{ cartItem.price }} credits</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="{{ path("send_order_email") }}" class="btn btn-success" style="margin-top: 25px;"><b>BUY</b></a>
+    </div>
+{% endblock %}

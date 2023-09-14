@@ -1,0 +1,12 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block body %}
+    <p>Hello,</p>
+    <p>A new order has been placed. Please review the details below:</p>
+
+    <p>You can approve the request by clicking the link below:</p>
+    <a href="{{ editClientUrl }}">{{ editClientUrl }}</a>
+
+    <p>Thank you.</p>
+{% endblock %}
+

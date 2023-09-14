@@ -1,0 +1,64 @@
+{% extends 'frontend-layout.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 3.5rem;">
+        <div class="row">
+            <div class="col-12 text-right">
+                <a href="{{ path("list-of-main-products") }}">
+                    <a href="{{ path("cart-items") }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                    </a>
+                    <span id="cart-badge" class="badge badge-warning">{{ totalCarItems }}</span>
+                </a>
+            </div>
+
+            {% for product in products %}
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset('uploads/files/' ~ product.file) }}"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <h4><span class="badge badge-light">{{ product.price }} credits</span></h4>
+                            <a href="#" class="btn btn-warning add-to-cart"
+                               data-product-id="{{ product.id }}" data-product-price="{{ product.price }}"><b>Add to
+                                    cart</b></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_javascripts %}
+    <script>
+        $(".add-to-cart").click(function (e) {
+            e.preventDefault();
+            var button = $(this);
+            $.ajax({
+                type: "POST",
+                url: "/add-to-cart",
+                data: {
+                    productId: button.data("product-id"),
+                    productPrice: button.data("product-price")
+                },
+                success: function (result) {
+                    if (result.success) {
+                        $("#cart-badge").text(result.cartItemCount);
+                    } else {
+                        alert('Error: ' + result.message);
+                    }
+                },
+                error: function (result) {
+                    alert('An error occurred.');
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
